@@ -1,0 +1,16 @@
+# See https://atom.io/docs/latest/creating-a-package#menus for more details
+'context-menu':
+  '.overlayer':
+      'Enable draw-package': 'draw-package:toggle'
+
+'menu': [
+  {
+    'label': 'Packages'
+    'submenu': [
+      'label': 'draw-package'
+      'submenu': [
+        { 'label': 'Toggle', 'command': 'draw-package:toggle' }
+      ]
+    ]
+  }
+]
