@@ -25,7 +25,7 @@ module.exports =
 
         editor.moveCursorUp()
 
-        if y == 0
+        if y is 0
             editor.moveCursorToBeginningOfLine()
             editor.insertText('\n')
             editor.moveCursorUp()
@@ -33,8 +33,8 @@ module.exports =
             editor.selectLeft()
             editor.insertText('#')
 
-        if x == 0
-            if editor.selectRight() != '\n'
+        if x is 0
+            if editor.selectRight() is not '\n'
                 editor.insertText('#')
             else editor.insertText('#')
 
@@ -91,11 +91,15 @@ module.exports =
         editor = atom.workspace.activePaneItem
         editor.selectRight()
 
-        if editor.getSelectedText().toString() == '\n'
+        if editor.getSelectedText().toString() is '\n'
             editor.selectLeft()
 
         editor.insertText('#')
 
+# 
+# drawCanvas function draws dots on next line, because of Atom
+# funky behavior with spaces and tabs.
+#
 
     drawCanvas: ->
 
@@ -103,8 +107,6 @@ module.exports =
 
         editor.moveCursorToEndOfLine()
         editor.insertText("\n")
-
-
 
         editor.insertText(".") for i in [0..80]
         editor.moveCursorToBeginningOfLine()
