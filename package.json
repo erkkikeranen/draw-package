@@ -2,7 +2,7 @@
   "name": "draw-package",
   "main": "./lib/draw-package",
   "version": "0.1.0",
-  "description": "A short description of your package",
+  "description": "Draw Ascii-art with CTRL-ALT + cursor keys",
   "activationEvents": ["draw-package:drawUp", "draw-package:drawDown", "draw-package:drawLeft", "draw-package:drawRight", "draw-package:drawCanvas"],
   "repository": "https://github.com/atom/draw-package",
   "license": "MIT",
