@@ -4,7 +4,7 @@
   "version": "0.1.0",
   "description": "Draw Ascii-art with CTRL-ALT + cursor keys",
   "activationEvents": ["draw-package:drawUp", "draw-package:drawDown", "draw-package:drawLeft", "draw-package:drawRight", "draw-package:drawCanvas"],
-  "repository": "https://github.com/atom/draw-package",
+  "repository": "https://github.com/erkkikeranen/draw-package",
   "license": "MIT",
   "engines": {
     "atom": ">0.50.0"
