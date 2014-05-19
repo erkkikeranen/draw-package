@@ -2,8 +2,9 @@
 #
 # [ok] add commant to draw dot lines as drawing background (create canvas)
 # add command to change dots in selection to whitespace (finish)
-# modify upline so that it will extend length of line
-#
+# add command to dotify line till end
+# [ok] modify upline so that it will extend length of line
+# bug : moving up/down after left shifts left
 # later configuriation mode panel
 
 
@@ -19,25 +20,44 @@ module.exports =
     drawUp: ->
 
         editor = atom.workspace.activePaneItem
+
+        # get current cursor position
+
         cursorPosition = editor.getCursorBufferPosition().toArray()
         y = cursorPosition[0];
         x = cursorPosition[1];
 
-        editor.moveCursorUp()
+        # if cursor was on first line, then add one line above:
 
         if y is 0
             editor.moveCursorToBeginningOfLine()
             editor.insertText('\n')
             editor.moveCursorUp()
-        if x > 0
+            if x > 0
+                editor.insertText('.') for i in [0..(x-1)]
             editor.selectLeft()
             editor.insertText('#')
 
-        if x is 0
-            if editor.selectRight() is not '\n'
-                editor.insertText('#')
-            else editor.insertText('#')
+        # if cursor was not on first line :
 
+        else if y > 0
+
+            editor.moveCursorUp()
+
+            cursorPositionAtNewLine = editor.getCursorBufferPosition().toArray()
+            x2 = cursorPositionAtNewLine[1];
+
+            if x > x2
+
+                editor.insertText(".") for i in [x2..(x-1)]
+                editor.selectLeft()
+                editor.insertText('#')
+
+            if x2 == x
+                editor.selectLeft()
+                editor.insertText('#')
+
+# drawDown draws down, and inserts new line if end of file.
 
     drawDown: ->
 
@@ -45,8 +65,6 @@ module.exports =
         cursorPosition = editor.getCursorBufferPosition().toArray()
         y = cursorPosition[0];
         x = cursorPosition[1];
-
-
 
         # if already at last line add new line
         if editor.getLineCount() <= (y+1)
@@ -60,16 +78,26 @@ module.exports =
 
             if x > 0
                 editor.selectLeft()
-
+            editor.insertText('#')
 
         else
             editor.moveCursorDown()
-            if x > 0
+
+            cursorPositionAtNewLine = editor.getCursorBufferPosition().toArray()
+            x2 = cursorPositionAtNewLine[1];
+
+            if x > x2
+
+                editor.insertText(".") for i in [x2..(x-1)]
                 editor.selectLeft()
+                editor.insertText('#')
+
+            else
+                editor.selectLeft()
+                editor.insertText('#')
 
 
-        editor.insertText('#')
-
+# drawLeft function draws to the left
 
     drawLeft: ->
 
@@ -77,7 +105,6 @@ module.exports =
         cursorPosition = editor.getCursorBufferPosition().toArray()
         y = cursorPosition[0];
         x = cursorPosition[1];
-        tabsize = editor.getTabLength()
 
         if x > 0
             editor.selectLeft()
@@ -85,6 +112,7 @@ module.exports =
             editor.insertText('#')
             editor.moveCursorLeft()
 
+# drawRight function draws to the right
 
     drawRight: ->
 
@@ -96,10 +124,8 @@ module.exports =
 
         editor.insertText('#')
 
-# 
 # drawCanvas function draws dots on next line, because of Atom
 # funky behavior with spaces and tabs.
-#
 
     drawCanvas: ->
 
