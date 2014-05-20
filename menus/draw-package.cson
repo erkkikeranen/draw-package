@@ -13,17 +13,21 @@
             'label': 'Draw Up', 'command': 'draw-package:drawUp'
         }
         {
-            'label': 'Draw Down', 'command': 'draw-package:drawDown',
+            'label': 'Draw Down', 'command': 'draw-package:drawDown'
         }
         {
-            'label': 'Draw Left', 'command': 'draw-package:drawLeft',
+            'label': 'Draw Left', 'command': 'draw-package:drawLeft'
         }
         {
-            'label': 'Draw Right', 'command': 'draw-package:drawRight',
+            'label': 'Draw Right', 'command': 'draw-package:drawRight'
         }
         {
             'label': 'Draw Canvas', 'command': 'draw-package:drawCanvas'
         }
+        {
+            'label': 'Finish Canvas', 'command': 'draw-package:finishCanvas'
+        }
+
       ]
     ]
   }

@@ -2,7 +2,7 @@
 #
 # [ok] add commant to draw dot lines as drawing background (create canvas)
 # add command to change dots in selection to whitespace (finish)
-# modify addlines to dotify line till end
+# [ok] modify addlines to dotify line till end
 # [ok] modify upline so that it will extend length of line
 # [ok] bug : moving up/down after left shifts left
 # later configuriation mode panel
@@ -16,6 +16,7 @@ module.exports =
         atom.workspaceView.command "draw-package:drawLeft", => @drawLeft()
         atom.workspaceView.command "draw-package:drawRight", => @drawRight()
         atom.workspaceView.command "draw-package:drawCanvas", => @drawCanvas()
+        atom.workspaceView.command "draw-package:finishCanvas", => @finishCanvas()
 
     drawUp: ->
 
@@ -145,3 +146,14 @@ module.exports =
 
         editor.insertText(".") for i in [0..80]
         editor.moveCursorToBeginningOfLine()
+
+    finishCanvas: ->
+
+
+        editor = atom.workspace.activePaneItem
+
+        selection = editor.getSelectedText().toString()
+
+        finished = selection.replace(/[.]/g, " ")
+
+        editor.insertText(finished)

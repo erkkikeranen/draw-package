@@ -13,3 +13,4 @@
   'ctrl-alt-left': 'draw-package:drawLeft'
   'ctrl-alt-right': 'draw-package:drawRight'
   'ctrl-alt-.': 'draw-package:drawCanvas'
+  'ctrl-alt-f': 'draw-package:finishCanvas'
