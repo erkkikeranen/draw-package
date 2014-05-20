@@ -1,7 +1,7 @@
 # See https://atom.io/docs/latest/creating-a-package#menus for more details
 'context-menu':
-  '.overlayer':
-      'Enable draw-package': 'draw-package:toggle'
+  '.workspace':
+      'draw-package draw Canvas Line': 'draw-package:drawCanvas'
 
 'menu': [
   {
@@ -9,7 +9,21 @@
     'submenu': [
       'label': 'draw-package'
       'submenu': [
-        { 'label': 'Toggle', 'command': 'draw-package:toggle' }
+        {
+            'label': 'Draw Up', 'command': 'draw-package:drawUp'
+        }
+        {
+            'label': 'Draw Down', 'command': 'draw-package:drawDown',
+        }
+        {
+            'label': 'Draw Left', 'command': 'draw-package:drawLeft',
+        }
+        {
+            'label': 'Draw Right', 'command': 'draw-package:drawRight',
+        }
+        {
+            'label': 'Draw Canvas', 'command': 'draw-package:drawCanvas'
+        }
       ]
     ]
   }

@@ -2,9 +2,9 @@
 #
 # [ok] add commant to draw dot lines as drawing background (create canvas)
 # add command to change dots in selection to whitespace (finish)
-# add command to dotify line till end
+# modify addlines to dotify line till end
 # [ok] modify upline so that it will extend length of line
-# bug : moving up/down after left shifts left
+# [ok] bug : moving up/down after left shifts left
 # later configuriation mode panel
 
 
@@ -37,6 +37,8 @@ module.exports =
                 editor.insertText('.') for i in [0..(x-1)]
             editor.selectLeft()
             editor.insertText('#')
+            editor.insertText(".") for i in [x..80]
+            editor.moveCursorLeft() for i in [80..x]
 
         # if cursor was not on first line :
 
@@ -52,6 +54,8 @@ module.exports =
                 editor.insertText(".") for i in [x2..(x-1)]
                 editor.selectLeft()
                 editor.insertText('#')
+                editor.insertText(".") for i in [x..80]
+                editor.moveCursorLeft() for i in [80..x]
 
             if x2 == x
                 editor.selectLeft()
@@ -70,7 +74,7 @@ module.exports =
         if editor.getLineCount() <= (y+1)
             editor.moveCursorToEndOfLine()
             editor.insertText("\n")
-            editor.setSoftTabs(false)
+
 
             if x >= 1
                 editor.insertText(".") for i in [1..x]
@@ -79,6 +83,8 @@ module.exports =
             if x > 0
                 editor.selectLeft()
             editor.insertText('#')
+            editor.insertText(".") for i in [x..80]
+            editor.moveCursorLeft() for i in [80..x]
 
         else
             editor.moveCursorDown()
@@ -91,6 +97,8 @@ module.exports =
                 editor.insertText(".") for i in [x2..(x-1)]
                 editor.selectLeft()
                 editor.insertText('#')
+                editor.insertText(".") for i in [x..80]
+                editor.moveCursorLeft() for i in [80..x]
 
             else
                 editor.selectLeft()
@@ -107,10 +115,11 @@ module.exports =
         x = cursorPosition[1];
 
         if x > 0
-            editor.selectLeft()
+            editor.moveCursorLeft()
+            editor.moveCursorLeft()
+            editor.selectRight()
 
             editor.insertText('#')
-            editor.moveCursorLeft()
 
 # drawRight function draws to the right
 
