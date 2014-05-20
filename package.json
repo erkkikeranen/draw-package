@@ -1,14 +1,20 @@
 {
   "name": "draw-package",
   "main": "./lib/draw-package",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Draw Ascii-art with CTRL-ALT + cursor keys",
-  "activationEvents": ["draw-package:drawUp", "draw-package:drawDown", "draw-package:drawLeft", "draw-package:drawRight", "draw-package:drawCanvas", "draw-package:finishCanvas"],
+  "activationEvents": [
+    "draw-package:drawUp",
+    "draw-package:drawDown",
+    "draw-package:drawLeft",
+    "draw-package:drawRight",
+    "draw-package:drawCanvas",
+    "draw-package:finishCanvas"
+  ],
   "repository": "https://github.com/erkkikeranen/draw-package",
   "license": "MIT",
   "engines": {
     "atom": ">0.50.0"
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }
