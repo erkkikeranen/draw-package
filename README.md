@@ -1,4 +1,4 @@
-# draw-package package
+# draw-package for Atom
 
 Simple package for drawing Ascii-art in your text file.
 
