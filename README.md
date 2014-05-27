@@ -24,4 +24,4 @@ understand it - this would get rid of using the dot canvas.
 No tests written yet.
 
 
-![A screenshot of draw-package](https://raw.githubusercontent.com/wiki/erkkikeranen/draw-package/draw-package-demo-movie.gif?login=erkkikeranen&token=7282087__eyJzY29wZSI6Ildpa2k6ZXJra2lrZXJhbmVuL2RyYXctcGFja2FnZS9kcmF3LXBhY2thZ2UtZGVtby1tb3ZpZS5naWYiLCJleHBpcmVzIjoxNDAxMjIyNjA0fQ%3D%3D--378075e5b486ed0bf7b322338d17ca4546f6f2fa)
+![A screenshot of draw-package](https://raw.githubusercontent.com/wiki/erkkikeranen/draw-package/draw-package-demo-movie.gif
