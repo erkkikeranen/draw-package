@@ -11,15 +11,15 @@ or other art you want to keep :)...
 Adding lines or moving to line that is shorter than previous line, will result
 that the line will be filled with canvas.
 
-Ctrl-Alt    Up	- draw up
-			Down  - draw down
-			Left  - draw left
-			Right - draw right
-			.     - create canvas line (fill with 80 .)
-			f	 - finish selection (replace . with whitespace)
+Ctrl-Alt    i	- draw up
+			k  - draw down
+			j  - draw left
+			l - draw right
+			u     - create canvas line (fill with 80 x .)
+			o	 - finish selection (replace . with whitespace)
 
 issues : Problem with tab / space behavior in Atom. Or the author doesn't fully
-understand it - this would get rid of using the dot canvas.
+understand it - this would get rid of using the dot canvas. Probably some new after removing deprecations...
 
 No tests written yet.
 

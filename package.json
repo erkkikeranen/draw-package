@@ -2,19 +2,19 @@
   "name": "draw-package",
   "main": "./lib/draw-package",
   "version": "0.1.1",
-  "description": "Draw Ascii-art with CTRL-ALT + cursor keys",
-  "activationEvents": [
-    "draw-package:drawUp",
-    "draw-package:drawDown",
-    "draw-package:drawLeft",
-    "draw-package:drawRight",
-    "draw-package:drawCanvas",
-    "draw-package:finishCanvas"
-  ],
+  "description": "Draw Ascii-art with CTRL-ALT + ijkl keys",
+  "activationCommands": {
+    "atom-workspace": "draw-package:drawUp",
+    "atom-workspace": "draw-package:drawDown",
+    "atom-workspace": "draw-package:drawLeft",
+    "atom-workspace": "draw-package:drawRight",
+    "atom-workspace": "draw-package:drawCanvas",
+    "atom-workspace": "draw-package:finishCanvas"
+  },
   "repository": "https://github.com/erkkikeranen/draw-package",
   "license": "MIT",
   "engines": {
-    "atom": ">0.50.0"
+    "atom": ">=0.5.0 <2.0.0"
   },
   "dependencies": {}
 }

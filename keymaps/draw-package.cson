@@ -7,10 +7,10 @@
 
 # For more detailed documentation see
 # https://atom.io/docs/latest/advanced/keymaps
-'.editor':
-  'ctrl-alt-up': 'draw-package:drawUp'
-  'ctrl-alt-down': 'draw-package:drawDown'
-  'ctrl-alt-left': 'draw-package:drawLeft'
-  'ctrl-alt-right': 'draw-package:drawRight'
-  'ctrl-alt-.': 'draw-package:drawCanvas'
-  'ctrl-alt-f': 'draw-package:finishCanvas'
+'atom-workspace':
+    'ctrl-alt-i': 'draw-package:drawUp'
+    'ctrl-alt-k': 'draw-package:drawDown'
+    'ctrl-alt-j': 'draw-package:drawLeft'
+    'ctrl-alt-l': 'draw-package:drawRight'
+    'ctrl-alt-u': 'draw-package:drawCanvas'
+    'ctrl-alt-o': 'draw-package:finishCanvas'

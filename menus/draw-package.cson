@@ -1,6 +1,6 @@
 # See https://atom.io/docs/latest/creating-a-package#menus for more details
 'context-menu':
-  '.workspace':
+  '.atom-workspace':
       'draw-package draw Canvas Line': 'draw-package:drawCanvas'
 
 'menu': [
@@ -10,22 +10,28 @@
       'label': 'draw-package'
       'submenu': [
         {
-            'label': 'Draw Up', 'command': 'draw-package:drawUp'
+            'label': 'Draw Up'
+            'command': 'draw-package:drawUp'
         }
         {
-            'label': 'Draw Down', 'command': 'draw-package:drawDown'
+            'label': 'Draw Down'
+            'command': 'draw-package:drawDown'
         }
         {
-            'label': 'Draw Left', 'command': 'draw-package:drawLeft'
+            'label': 'Draw Left'
+            'command': 'draw-package:drawLeft'
         }
         {
-            'label': 'Draw Right', 'command': 'draw-package:drawRight'
+            'label': 'Draw Right'
+            'command': 'draw-package:drawRight'
         }
         {
-            'label': 'Draw Canvas', 'command': 'draw-package:drawCanvas'
+            'label': 'Draw Canvas'
+            'command': 'draw-package:drawCanvas'
         }
         {
-            'label': 'Finish Canvas', 'command': 'draw-package:finishCanvas'
+            'label': 'Finish Canvas'
+            'command': 'draw-package:finishCanvas'
         }
 
       ]

@@ -7,153 +7,161 @@
 # [ok] bug : moving up/down after left shifts left
 # later configuriation mode panel
 
+{CompositeDisposable} = require 'atom'
 
 module.exports =
+  subscriptions: null
 
-    activate: ->
-        atom.workspaceView.command "draw-package:drawUp", => @drawUp()
-        atom.workspaceView.command "draw-package:drawDown", => @drawDown()
-        atom.workspaceView.command "draw-package:drawLeft", => @drawLeft()
-        atom.workspaceView.command "draw-package:drawRight", => @drawRight()
-        atom.workspaceView.command "draw-package:drawCanvas", => @drawCanvas()
-        atom.workspaceView.command "draw-package:finishCanvas", => @finishCanvas()
+  activate: ->
+
+      @subscriptions = new CompositeDisposable
+      @subscriptions.add atom.commands.add 'atom-workspace',
+        "draw-package:drawUp": => @drawUp()
+      @subscriptions.add atom.commands.add 'atom-workspace',
+        "draw-package:drawDown": => @drawDown()
+      @subscriptions.add atom.commands.add 'atom-workspace',
+        "draw-package:drawLeft": => @drawLeft()
+      @subscriptions.add atom.commands.add 'atom-workspace',
+        "draw-package:drawRight": => @drawRight()
+      @subscriptions.add atom.commands.add 'atom-workspace',
+        "draw-package:drawCanvas": => @drawCanvas()
+      @subscriptions.add atom.commands.add 'atom-workspace',
+        "draw-package:finishCanvas": => @finishCanvas()
 
     drawUp: ->
 
-        editor = atom.workspace.activePaneItem
+      console.log ('draw');
+      editor = atom.workspace.getActiveTextEditor()
 
-        # get current cursor position
+      # get current cursor position
 
-        cursorPosition = editor.getCursorBufferPosition().toArray()
-        y = cursorPosition[0];
-        x = cursorPosition[1];
+      cursorPosition = editor.getCursorBufferPosition().toArray()
+      y = cursorPosition[0];
+      x = cursorPosition[1];
 
-        # if cursor was on first line, then add one line above:
+      # if cursor was on first line, then add one line above:
 
-        if y is 0
-            editor.moveCursorToBeginningOfLine()
-            editor.insertText('\n')
-            editor.moveCursorUp()
-            if x > 0
-                editor.insertText('.') for i in [0..(x-1)]
-            editor.selectLeft()
-            editor.insertText('#')
-            editor.insertText(".") for i in [x..80]
-            editor.moveCursorLeft() for i in [80..x]
+      if y is 0
+        editor.moveToBeginningOfLine()
+        editor.insertText('\n')
+        editor.moveUp(1)
+        if x > 0
+          editor.insertText('.') for i in [0..(x-1)]
+        editor.selectLeft()
+        editor.insertText('#')
+        editor.insertText(".") for i in [x..80]
+        editor.moveLeft(1) for i in [80..x]
 
-        # if cursor was not on first line :
+      # if cursor was not on first line :
 
-        else if y > 0
+      else if y > 0
+        editor.moveUp()
 
-            editor.moveCursorUp()
+        cursorPositionAtNewLine = editor.getCursorBufferPosition().toArray()
+        x2 = cursorPositionAtNewLine[1];
 
-            cursorPositionAtNewLine = editor.getCursorBufferPosition().toArray()
-            x2 = cursorPositionAtNewLine[1];
+        if x > x2
 
-            if x > x2
+          editor.insertText(".") for i in [x2..(x-1)]
+          editor.selectLeft()
+          editor.insertText('#')
+          editor.insertText(".") for i in [x..80]
+          editor.moveLeft() for i in [80..x]
 
-                editor.insertText(".") for i in [x2..(x-1)]
-                editor.selectLeft()
-                editor.insertText('#')
-                editor.insertText(".") for i in [x..80]
-                editor.moveCursorLeft() for i in [80..x]
-
-            if x2 == x
-                editor.selectLeft()
-                editor.insertText('#')
+        if x2 == x
+          editor.selectLeft()
+          editor.insertText('#')
 
 # drawDown draws down, and inserts new line if end of file.
 
     drawDown: ->
 
-        editor = atom.workspace.activePaneItem
-        cursorPosition = editor.getCursorBufferPosition().toArray()
-        y = cursorPosition[0];
-        x = cursorPosition[1];
+      editor = atom.workspace.getActiveTextEditor()
+      cursorPosition = editor.getCursorBufferPosition().toArray()
+      y = cursorPosition[0];
+      x = cursorPosition[1];
 
-        # if already at last line add new line
-        if editor.getLineCount() <= (y+1)
-            editor.moveCursorToEndOfLine()
-            editor.insertText("\n")
+      # if already at last line add new line
+      if editor.getLineCount() <= (y+1)
+          editor.moveToEndOfLine()
+          editor.insertText("\n")
 
+          if x >= 1
+              editor.insertText(".") for i in [1..x]
+          if x > 0
+              editor.selectLeft()
 
-            if x >= 1
-                editor.insertText(".") for i in [1..x]
+          editor.insertText('#')
+          editor.insertText(".") for i in [x..80]
+          editor.moveLeft() for i in [80..x]
 
+      else
+          editor.moveDown()
 
-            if x > 0
-                editor.selectLeft()
-            editor.insertText('#')
-            editor.insertText(".") for i in [x..80]
-            editor.moveCursorLeft() for i in [80..x]
+          cursorPositionAtNewLine = editor.getCursorBufferPosition().toArray()
+          x2 = cursorPositionAtNewLine[1];
 
-        else
-            editor.moveCursorDown()
+          if x > x2
 
-            cursorPositionAtNewLine = editor.getCursorBufferPosition().toArray()
-            x2 = cursorPositionAtNewLine[1];
+              editor.insertText(".") for i in [x2..(x-1)]
+              editor.selectLeft()
+              editor.insertText('#')
+              editor.insertText(".") for i in [x..80]
+              editor.moveLeft() for i in [80..x]
 
-            if x > x2
-
-                editor.insertText(".") for i in [x2..(x-1)]
-                editor.selectLeft()
-                editor.insertText('#')
-                editor.insertText(".") for i in [x..80]
-                editor.moveCursorLeft() for i in [80..x]
-
-            else
-                editor.selectLeft()
-                editor.insertText('#')
+          else
+              editor.selectLeft()
+              editor.insertText('#')
 
 
 # drawLeft function draws to the left
 
-    drawLeft: ->
+  drawLeft: ->
 
-        editor = atom.workspace.activePaneItem
-        cursorPosition = editor.getCursorBufferPosition().toArray()
-        y = cursorPosition[0];
-        x = cursorPosition[1];
+      editor = atom.workspace.getActiveTextEditor()
+      cursorPosition = editor.getCursorBufferPosition().toArray()
+      y = cursorPosition[0];
+      x = cursorPosition[1];
 
-        if x > 0
-            editor.moveCursorLeft()
-            editor.moveCursorLeft()
-            editor.selectRight()
+      if x > 0
+          editor.moveLeft()
+          editor.moveLeft()
+          editor.selectRight()
 
-            editor.insertText('#')
+          editor.insertText('#')
 
 # drawRight function draws to the right
 
     drawRight: ->
 
-        editor = atom.workspace.activePaneItem
-        editor.selectRight()
+      editor = atom.workspace.getActiveTextEditor()
+      editor.selectRight()
 
-        if editor.getSelectedText().toString() is '\n'
-            editor.selectLeft()
+      if editor.getSelectedText().toString() is '\n'
+          editor.selectLeft()
 
-        editor.insertText('#')
+      editor.insertText('#')
 
 # drawCanvas function draws dots on next line, because of Atom
 # funky behavior with spaces and tabs.
 
     drawCanvas: ->
 
-        editor = atom.workspace.activePaneItem
+      editor = atom.workspace.getActiveTextEditor()
 
-        editor.moveCursorToEndOfLine()
-        editor.insertText("\n")
+      editor.moveToEndOfLine()
+      editor.insertText("\n")
 
-        editor.insertText(".") for i in [0..80]
-        editor.moveCursorToBeginningOfLine()
+      editor.insertText(".") for i in [0..80]
+      editor.moveToBeginningOfLine()
 
     finishCanvas: ->
 
 
-        editor = atom.workspace.activePaneItem
+      editor = atom.workspace.getActiveTextEditor()
 
-        selection = editor.getSelectedText().toString()
+      selection = editor.getSelectedText().toString()
 
-        finished = selection.replace(/[.]/g, " ")
+      finished = selection.replace(/[.]/g, " ")
 
-        editor.insertText(finished)
+      editor.insertText(finished)
