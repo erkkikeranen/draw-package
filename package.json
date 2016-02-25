@@ -1,14 +1,9 @@
 {
   "name": "draw-package",
   "main": "./lib/draw-package",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Draw Ascii-art with CTRL-ALT + ijkl keys",
   "activationCommands": {
-    "atom-workspace": "draw-package:drawUp",
-    "atom-workspace": "draw-package:drawDown",
-    "atom-workspace": "draw-package:drawLeft",
-    "atom-workspace": "draw-package:drawRight",
-    "atom-workspace": "draw-package:drawCanvas",
     "atom-workspace": "draw-package:finishCanvas"
   },
   "repository": "https://github.com/erkkikeranen/draw-package",
